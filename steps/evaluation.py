@@ -1,31 +1,41 @@
 import logging
+import numpy as np
 import pandas as pd
+from model.evaluation import MSE, RMSE, R2Score
+from sklearn.base import RegressorMixin
+from typing_extensions import Annotated
 from zenml import step
+from typing import Tuple
 
 @step
-def evaluate_model(df: pd.DataFrame) -> None:
+def evaluate_model(
+    model: RegressorMixin, x_test: pd.DataFrame, y_test: pd.Series
+) -> Tuple[Annotated[float, "r2_score"], Annotated[float, "rmse"]]:
     """
-    Evaluate the model's performance using appropriate metrics.
-
     Args:
-        predictions (pd.Series): Predicted values from the model.
-        actual_values (pd.Series): Actual target values.
-
+        model: RegressorMixin
+        x_test: pd.DataFrame
+        y_test: pd.Series
     Returns:
-        None
+        r2_score: float
+        rmse: float
     """
     try:
-        # Add your evaluation code here
-        # Compute metrics, generate visualizations, etc.
-        # Example:
-        # metric = calculate_metric(predictions, actual_values)
-        # logging.info(f"Evaluation metric: {metric}")
+        prediction = model.predict(x_test)
 
-        # You can also save evaluation results or visualizations
-        # to the ZenML Artifacts store if needed.
+        # Using the MSE class for mean squared error calculation
+        mse_class = MSE()
+        mse = mse_class.calculate_score(y_test, prediction)
 
-        pass  # Remove this line once you add your evaluation code
+        # Using the R2Score class for R2 score calculation
+        r2_class = R2Score()
+        r2_score = r2_class.calculate_score(y_test, prediction)
 
+        # Using the RMSE class for root mean squared error calculation
+        rmse_class = RMSE()
+        rmse = rmse_class.calculate_score(y_test, prediction)
+
+        return r2_score, rmse
     except Exception as e:
-        logging.error(f"Error during model evaluation: {e}")
+        logging.error(e)
         raise e

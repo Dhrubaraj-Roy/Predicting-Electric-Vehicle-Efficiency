@@ -1,53 +1,70 @@
 import logging
+# import mlflow
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
+from model.model_dev import (
+    HyperparameterTuner,
+    # LightGBMModel,
+    LinearRegressionModel,
+    RandomForestModel,
+    # XGBoostModel,
+)
+from sklearn.base import RegressorMixin
 from zenml import step
+from zenml.client import Client
 
+from .config import ModelNameConfig
 
-# Define constants for data splitting
-TEST_SIZE = 0.2
-RANDOM_STATE = 42
+experiment_tracker = Client().active_stack.experiment_tracker
 
-@step
-def train_model(data: pd.DataFrame) -> None:
+@step(experiment_tracker=experiment_tracker)
+def train_model(
+    x_train: pd.DataFrame,
+    x_test: pd.DataFrame,
+    y_train: pd.Series,
+    y_test: pd.Series,
+    config: ModelNameConfig,
+) -> RegressorMixin:
     """
-    Train a linear regression model using the provided data.
+    Train a regression model based on the specified configuration.
 
     Args:
-        data (pd.DataFrame): The training data.
+        x_train (pd.DataFrame): Training data features.
+        x_test (pd.DataFrame): Testing data features.
+        y_train (pd.Series): Training data target.
+        y_test (pd.Series): Testing data target.
+        config (ModelNameConfig): Model configuration.
 
     Returns:
-        Model: The trained machine learning model.
+        RegressorMixin: Trained regression model.
     """
     try:
-        # # Split data into features (X) and target (y)
-        # X = data.drop(columns=['target_column'])  # Replace 'target_column' with your actual target column name
-        # y = data['target_column']  # Replace 'target_column' with your actual target column name
+        model = None
+        tuner = None
 
-        # # Split data into training and testing sets
-        # X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+        # if config.model_name == "lightgbm":
+        #     # mlflow.lightgbm.autolog()
+        #     model = LightGBMModel()
+        if config.model_name == "randomforest":
+            # mlflow.sklearn.autolog()
+            model = RandomForestModel()
+        # elif config.model_name == "xgboost":
+        #     # mlflow.xgboost.autolog()
+        #     model = XGBoostModel()
+        elif config.model_name == "linear_regression":
+            # mlflow.sklearn.autolog()
+            model = LinearRegressionModel()
+        else:
+            raise ValueError("Model name not supported")
 
-        # # Initialize and train a linear regression model
-        # model = LinearRegression()
-        # model.fit(X_train, y_train)
+        tuner = HyperparameterTuner(model, x_train, y_train, x_test, y_test)
 
-        # # Make predictions on the test set
-        # y_pred = model.predict(X_test)
-
-        # # Calculate the Mean Squared Error (MSE) as a performance metric
-        # mse = mean_squared_error(y_test, y_pred)
-
-        # # Log the MSE
-        # logging.info(f"Mean Squared Error (MSE): {mse}")
-
-        # # Create a ZenML Model artifact
-        # ml_model = Model().from_estimator(model)
-
-        # return ml_model
-        pass
-
+        if config.fine_tuning:
+            best_params = tuner.optimize()
+            trained_model = model.train(x_train, y_train, **best_params)
+        else:
+            trained_model = model.train(x_train, y_train)
+        
+        return trained_model
     except Exception as e:
-        logging.error(f"Error during model training: {e}")
-        raise InputError(e)
+        logging.error(e)
+        raise e

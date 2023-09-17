@@ -24,8 +24,8 @@ def ingest_df(data_path: str) -> pd.DataFrame:
         pd.DataFrame: A pandas DataFrame containing the ingested data.
     """
     try:
-        ingest_data = IngestData(data_path)
-        df = ingest_data.get_data()
+        ingest_df = IngestData(data_path)
+        df = ingest_df.get_data()
         return df
     except Exception as e:
         logging.error(f"Error while ingesting data: {e}")
