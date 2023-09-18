@@ -7,10 +7,11 @@ from zenml import step
 from typing_extensions import Annotated
 
 @step
-def clean_df(
-    data: pd.DataFrame,
-) -> Tuple[
-    pd.DataFrame, pd.DataFrame, pd.Series, pd.Series
+def clean_df(data: pd.DataFrame) -> Tuple[
+    Annotated[pd.DataFrame, 'x_train'],
+    Annotated[pd.DataFrame, 'x_test'],
+    Annotated[pd.Series, 'y_train'],
+    Annotated[pd.Series, 'y_test'],
 ]:
     """
     Data cleaning class which preprocesses the data and divides it into train and test data.
