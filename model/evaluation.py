@@ -8,14 +8,14 @@ class Evaluation(ABC):
     Abstract Class defining the strategy for evaluating model performance
     """
     @abstractmethod
-    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray):
         pass
 
 class MSE(Evaluation):
     """
     Evaluation strategy that uses Mean Squared Error (MSE)
     """
-    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray):
         try:
             logging.info("Entered the calculate_score method of the MSE class")
             mse = mean_squared_error(y_true, y_pred)
@@ -28,11 +28,11 @@ class MSE(Evaluation):
             )
             raise e
 
-class R2Score(Evaluation):
+class R2(Evaluation):
     """
     Evaluation strategy that uses R2 Score
     """
-    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray):
         try:
             logging.info("Entered the calculate_score method of the R2Score class")
             r2 = r2_score(y_true, y_pred)
@@ -49,7 +49,7 @@ class RMSE(Evaluation):
     """
     Evaluation strategy that uses Root Mean Squared Error (RMSE)
     """
-    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray) -> float:
+    def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray):
         try:
             logging.info("Entered the calculate_score method of the RMSE class")
             rmse = np.sqrt(mean_squared_error(y_true, y_pred))

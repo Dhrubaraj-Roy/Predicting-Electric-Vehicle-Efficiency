@@ -8,8 +8,8 @@ from typing_extensions import Annotated
 
 @step
 def clean_df(data: pd.DataFrame) -> Tuple[
-    Annotated[pd.DataFrame, 'x_train'],
-    Annotated[pd.DataFrame, 'x_test'],
+    Annotated[pd.DataFrame, 'X_train'],
+    Annotated[pd.DataFrame, 'X_test'],
     Annotated[pd.Series, 'y_train'],
     Annotated[pd.Series, 'y_test'],
 ]:
@@ -26,10 +26,9 @@ def clean_df(data: pd.DataFrame) -> Tuple[
 
         divide_strategy = DataDivideStrategy()
         data_cleaning = DataCleaning(preprocessed_data, divide_strategy)
-        x_train, x_test, y_train, y_test = data_cleaning.handle_data()
+        X_train, X_test, y_train, y_test = data_cleaning.handle_data()
         logging.info(f"Data Cleaning Complete")
-
-        return x_train, x_test, y_train, y_test
+        return X_train, X_test, y_train, y_test 
     except Exception as e: 
         logging.error(e)
         raise e

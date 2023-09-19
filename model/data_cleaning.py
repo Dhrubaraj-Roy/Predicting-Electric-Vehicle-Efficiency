@@ -1,4 +1,5 @@
 import logging
+import numpy as np
 import pandas as pd
 from typing import Union
 from abc import ABC, abstractmethod
@@ -7,62 +8,96 @@ from sklearn.model_selection import train_test_split
 
 class DataStrategy(ABC):
     @abstractmethod
-    def handle_data(self, data: pd.DataFrame) -> pd.DataFrame:
+    def handle_data(self, data: pd.DataFrame) -> Union[pd.DataFrame, pd.Series]:
         pass
 
 class DataPreProcessStrategy(DataStrategy):
-    def handle_data(self, data: pd.DataFrame) -> pd.DataFrame:
+    def handle_data(self, data: pd.DataFrame) -> Union[pd.DataFrame, pd.Series]:
         try:
-             
-            # Define a list of columns with N/A and "-" values
-            columns_to_clean = ['PriceinUK', 'FastChargeSpeed']
 
-            # Handle non-numeric values in 'Subtitle' column
-            data['Battery_kWh'] = data['Subtitle'].str.extract(r'(\d+\.\d+) kWh').astype(float)
+            # # Display the first few rows of the DataFrame to understand its structure
+            # #data.drop(['Subtitle', 'Name'], axis=1, inplace=True)
+            
+            # print("Column Names:")
+            # print(data.columns)
+            # # Drop the 'Subtitle' and 'Name' columns
+            # data.drop(['Subtitle', 'Name'], axis=1,  inplace=True)
+            # print("DataFrame Shape After Drop:", data.shape)
+        
+            # data.replace('N/A', None, inplace=True)
 
-            # Handle non-numeric values in 'Efficiency' column
-            data['Efficiency_WhKm'] = data['Efficiency'].str.extract(r'(\d+) Wh/km').astype(int)
+            # # Extract battery capacity from 'Subtitle' column
+            # #data['BatteryCapacity'] = data['Subtitle'].str.extract(r'([\d.]+) kWh')
 
-            # Handle non-numeric values in 'FastChargeSpeed' column
-            data['FastChargeSpeed_kmph'] = data['FastChargeSpeed'].str.extract(r'(\d+) km/h').astype(int)
+            # # Handle non-numeric values in 'Efficiency' column
+            # data['Efficiency_WhKm'] = data['Efficiency'].str.extract(r'(\d+) Wh/km').astype(int)
+            # data['FastChargeSpeed_kmph'] = data['FastChargeSpeed'].str.extract(r'(\d+) km/h').fillna(0).astype(int)
 
-            # Drop the columns you want to remove here
-            columns_to_drop = ['Name']  # Add the column names you want to drop
-            data = data.drop(columns_to_drop, axis=1)
 
-            # Handle missing values
-            for column in columns_to_clean:
-                # Replace "-" values with NaN
-                data[column] = data[column].replace('-', pd.NA)
-                # Convert column to numeric (if not already)
-                data[column] = pd.to_numeric(data[column], errors='coerce')
-                # Calculate the median of the column (ignoring NaN values)
-                median = data[column].median()
-                # Fill NaN values with the median
-                data[column].fillna(median, inplace=True)
 
-            # Handle missing values in 'PriceinUK'
-            data['PriceinUK'].replace('N/A', pd.NA, inplace=True)
 
-            # Handle currency columns
-            data['PriceinGermany'] = data['PriceinGermany'].str.replace('€', '').str.replace(',', '').astype(float)
-            data['PriceinUK'] = data['PriceinUK'].str.replace('£', '').str.replace(',', '').astype(float)
+            # # Convert data types
+            # #data['BatteryCapacity'] = data['BatteryCapacity'].astype(float)
 
-            # Check for any remaining missing values in the DataFrame
-            missing_values = data.isnull().sum()
-            print("Missing Values:")
-            print(missing_values)
+            # # Handle missing values
+            # columns_to_clean = ['PriceinUK', 'FastChargeSpeed']
+            # for column in columns_to_clean:
+            #     data[column] = data[column].replace('-', pd.NA)
+            #     data[column] = pd.to_numeric(data[column], errors='coerce')
+            #     median = data[column].median()
+            #     data[column].fillna(median, inplace=True)
 
-            # Save the cleaned DataFrame to a new CSV file
-            data.to_csv('cleaned_data.csv', index=False)
+            # # Handle missing values in 'PriceinUK'
+            # data['PriceinUK'].replace('N/A', pd.NA, inplace=True)
+            # data['PriceinUK'] = data['PriceinUK'].astype(float)
 
-            # Display the first few rows of the cleaned data
-            print("Cleaned Data:")
-            print(data.head())
+            # # Handle currency columns
+            # data['PriceinGermany'] = data['PriceinGermany'].str.replace('€', '').str.replace(',', '').astype(float)
 
+            # # Check for any remaining missing values in the DataFrame
+            # missing_values = data.isnull().sum()
+            # print("Missing Values:")
+            # print(missing_values)
+
+            # # Save the cleaned DataFrame to a new CSV file
+            # data.to_csv('cleaned_data4.csv', index=False)
+            # data = data.select_dtypes(include=[np.number])
+
+            # # Display the first few rows of the cleaned data
+            # print("Cleaned Data:")
+            # print(data.head())
+            
+            data.drop(['Name', 'Subtitle', 'Drive'], axis=1, inplace=True)
+
+            # Clean the 'PriceinGermany' and 'PriceinUK' columns by removing '€' and '£' signs
+            data['PriceinGermany'] = data['PriceinGermany'].str.replace('[€,]', '', regex=True).astype(float)
+            data['PriceinUK'] = data['PriceinUK'].str.replace('[£,]', '', regex=True).astype(float)
+
+            # Remove units from 'Range', 'Efficiency', and 'FastChargeSpeed' columns
+            data['Range'] = data['Range'].str.replace(' km', '').astype(float)
+            data['Efficiency'] = data['Efficiency'].str.replace(' Wh/km', '').astype(float)
+
+            # Handle 'FastChargeSpeed' column
+            data['FastChargeSpeed'] = data['FastChargeSpeed'].str.replace(' km/h', '')
+            # Replace non-numeric values ('-') with NaN
+            data['FastChargeSpeed'] = data['FastChargeSpeed'].replace('-', np.nan)
+            # Convert the column to float
+            data['FastChargeSpeed'] = data['FastChargeSpeed'].astype(float)
+
+            # Remove 'sec' from the 'Acceleration' column
+            data['Acceleration'] = data['Acceleration'].str.replace(' sec', '').astype(float)
+
+            # Remove ' km/h' from the 'TopSpeed' column
+            data['TopSpeed'] = data['TopSpeed'].str.replace(' km/h', '').astype(float)
+
+            # Fill N/A values with the mean of each column
+            data.fillna(data.mean(), inplace=True)
+
+            # Print the cleaned DataFrame
+            print(data)
             return data
         except Exception as e:
-            # Handle the exception and raise it again
+            logging.error("error in data_cleaning".format(e))
             raise e
 
 
@@ -84,7 +119,7 @@ class DataDivideStrategy(DataStrategy):
             )
             return X_train, X_test, y_train, y_test
         except Exception as e:
-            logging.error(e)
+            logging.error("Error in Divides the data into train and test data.".format(e))
             raise e
 
 class DataCleaning:
@@ -102,5 +137,5 @@ class DataCleaning:
         try:
             return self.strategy.handle_data(self.data)
         except Exception as e:
-            logging.error(e)
+            logging.error("error in handeling data".format(e))
             raise e

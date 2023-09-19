@@ -1,16 +1,13 @@
 import logging
 import pandas as pd
-from model.model_dev import (
-    LinearRegressionModel,
-    HyperparameterTuner,
-)
+from model.model_dev import LinearRegressionModel
 from sklearn.base import RegressorMixin
 from zenml import step
 from .config import ModelNameConfig
 @step()
 def train_model(
-    x_train: pd.DataFrame,
-    x_test: pd.DataFrame,
+    X_train: pd.DataFrame,
+    X_test: pd.DataFrame,
     y_train: pd.Series,
     y_test: pd.Series,
     config: ModelNameConfig,
@@ -19,8 +16,8 @@ def train_model(
     Train a regression model based on the specified configuration.
 
     Args:
-        x_train (pd.DataFrame): Training data features.
-        x_test (pd.DataFrame): Testing data features.
+        X_train (pd.DataFrame): Training data features.
+        X_test (pd.DataFrame): Testing data features.
         y_train (pd.Series): Training data target.
         y_test (pd.Series): Testing data target.
         config (ModelNameConfig): Model configuration.
@@ -30,23 +27,13 @@ def train_model(
     """
     try:
         model = None
-        tuner = None
-
         if config.model_name == "linear_regression":
             # mlflow.sklearn.autolog()
             model = LinearRegressionModel()
+            train_model = model.train(X_train, y_train)
+            return train_model
         else:
             raise ValueError("Model name not supported")
-
-        tuner = HyperparameterTuner(model, x_train, y_train, x_test, y_test)
-
-        if config.fine_tuning:
-            best_params = tuner.optimize()
-            trained_model = model.train(x_train, y_train, **best_params)
-        else:
-            trained_model = model.train(x_train, y_train)
-        
-        return trained_model
     except Exception as e:
-        logging.error(e)
+        logging.error("error in train model ".format(e))
         raise e

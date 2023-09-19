@@ -1,0 +1,103 @@
+Brand,Model,TopSpeed_KmH,Range_Km,Efficiency_WhKm,PowerTrain,BodyStyle,Seats,PriceEuro
+Tesla ,Model 3 Long Range Dual Motor,233,450,161,AWD,Sedan,5,55480
+Volkswagen ,ID.3 Pure,160,270,167,RWD,Hatchback,5,30000
+Polestar ,2,210,400,181,AWD,Liftback,5,56440
+BMW ,iX3 ,180,360,206,RWD,SUV,5,68040
+Honda ,e ,145,170,168,RWD,Hatchback,4,32997
+Lucid ,Air ,250,610,180,AWD,Sedan,5,105000
+Volkswagen ,e-Golf ,150,190,168,FWD,Hatchback,5,31900
+Peugeot ,e-208 ,150,275,164,FWD,Hatchback,5,29682
+Tesla ,Model 3 Standard Range Plus,225,310,153,RWD,Sedan,5,46380
+Audi ,Q4 e-tron ,180,400,193,AWD,SUV,5,55000
+Mercedes ,EQC 400 4MATIC,180,370,216,AWD,SUV,5,69484
+Nissan ,Leaf ,144,220,164,FWD,Hatchback,5,29234
+Hyundai ,Kona Electric 64 kWh,167,400,160,FWD,SUV,5,40795
+BMW ,i4 ,200,450,178,RWD,Sedan,5,65000
+Hyundai ,IONIQ Electric,165,250,153,FWD,Liftback,5,34459
+Volkswagen ,ID.3 Pro S,160,440,175,RWD,Hatchback,4,40936
+Porsche ,Taycan Turbo S,260,375,223,AWD,Sedan,4,180781
+Volkswagen ,e-Up! ,130,195,166,FWD,Hatchback,4,21421
+MG ,ZS EV,140,220,193,FWD,SUV,5,30000
+Mini ,Cooper SE ,150,185,156,FWD,Hatchback,4,31681
+Opel ,Corsa-e ,150,275,164,FWD,Hatchback,5,29146
+Tesla ,Model Y Long Range Dual Motor,217,425,171,AWD,SUV,7,58620
+Skoda ,Enyaq iV 50,160,290,179,RWD,SUV,5,35000
+Audi ,e-tron GT ,240,425,197,AWD,Sedan,4,125000
+Tesla ,Model 3 Long Range Performance,261,435,167,AWD,Sedan,5,61480
+Volkswagen ,ID.4 ,160,420,183,RWD,SUV,5,45000
+Volkswagen ,ID.3 Pro,160,350,166,RWD,Hatchback,5,33000
+Volvo ,XC40 P8 AWD Recharge,180,375,200,AWD,SUV,5,60437
+BMW ,i3 120 Ah,150,235,161,RWD,Hatchback,4,38017
+Peugeot ,e-2008 SUV ,150,250,180,FWD,SUV,5,34361
+Audi ,e-tron 50 quattro,190,280,231,AWD,SUV,5,67358
+Kia ,e-Niro 64 kWh,167,370,173,FWD,SUV,5,38105
+Renault ,Zoe ZE50 R110,135,315,165,FWD,Hatchback,5,31184
+Tesla ,Cybertruck Tri Motor,210,750,267,AWD,Pickup,6,75000
+Mazda ,MX-30 ,150,180,178,FWD,SUV,5,32646
+Nissan ,Leaf e+,157,325,172,FWD,Hatchback,5,37237
+Lexus ,UX 300e,160,270,193,FWD,SUV,5,50000
+CUPRA ,el-Born ,160,425,181,RWD,Hatchback,4,45000
+Renault ,Zoe ZE50 R135,140,310,168,FWD,Hatchback,5,33133
+Mercedes ,EQA ,200,350,171,AWD,SUV,5,45000
+Tesla ,Model S Long Range,250,515,184,AWD,Liftback,5,79990
+Hyundai ,Kona Electric 39 kWh,155,255,154,FWD,SUV,5,33971
+Audi ,e-tron Sportback 55 quattro,200,380,228,AWD,SUV,5,81639
+Skoda ,CITIGOe iV ,130,195,166,FWD,Hatchback,4,24534
+SEAT ,Mii Electric ,130,195,166,FWD,Hatchback,4,20129
+Kia ,e-Soul 64 kWh,167,365,175,FWD,SUV,5,36837
+Opel ,Ampera-e ,150,335,173,FWD,MPV,5,41906
+Porsche ,Taycan 4S,250,365,195,AWD,Sedan,4,102945
+Lightyear ,One ,150,575,104,AWD,Liftback,5,149000
+Aiways ,U5 ,150,335,188,FWD,SUV,5,36057
+Audi ,e-tron 55 quattro,200,365,237,AWD,SUV,5,79445
+Tesla ,Roadster ,410,970,206,AWD,Cabrio,4,215000
+Opel ,Mokka-e ,150,255,176,FWD,SUV,5,35000
+Skoda ,Enyaq iV 80,160,420,183,RWD,SUV,5,40000
+Tesla ,Model X Long Range,250,450,211,AWD,SUV,7,85990
+Honda ,e Advance,145,170,168,RWD,Hatchback,4,35921
+DS ,3 Crossback E-Tense,150,250,180,FWD,SUV,5,37422
+Renault ,Twingo ZE,135,130,164,RWD,Hatchback,4,24790
+Citroen ,e-C4 ,150,250,180,FWD,SUV,5,40000
+Tesla ,Model S Performance,261,505,188,AWD,Liftback,5,96990
+Renault ,Zoe ZE40 R110,135,255,161,FWD,Hatchback,5,29234
+Tesla ,Model Y Long Range Performance,241,410,177,AWD,SUV,7,65620
+Nissan ,Ariya 87kWh,160,440,198,FWD,Hatchback,5,50000
+Jaguar ,I-Pace ,200,365,232,AWD,SUV,5,75351
+Ford ,Mustang Mach-E ER RWD,180,450,200,RWD,SUV,5,54475
+Porsche ,Taycan 4S Plus,250,425,197,AWD,Sedan,4,109302
+Nissan ,e-NV200 Evalia ,123,190,200,FWD,SPV,7,33246
+Tesla ,Cybertruck Dual Motor,190,460,261,AWD,Pickup,6,55000
+Renault ,Kangoo Maxi ZE 33,130,160,194,FWD,SPV,5,38000
+Ford ,Mustang Mach-E ER AWD,180,430,209,AWD,SUV,5,62900
+BMW ,i3s 120 Ah,160,230,165,RWD,Hatchback,4,41526
+Skoda ,Enyaq iV 80X,160,400,193,AWD,SUV,5,45000
+Porsche ,Taycan Cross Turismo ,250,385,217,AWD,Station,4,150000
+Byton ,M-Byte 95 kWh 4WD,190,390,244,AWD,SUV,5,64000
+Sono ,Sion ,140,225,156,FWD,Hatchback,5,25500
+Kia ,e-Niro 39 kWh,155,235,167,FWD,SUV,5,34400
+Audi ,Q4 Sportback e-tron ,180,410,188,AWD,SUV,5,57500
+Smart ,EQ forfour ,130,95,176,RWD,Hatchback,4,22030
+Ford ,Mustang Mach-E SR AWD,180,340,206,AWD,SUV,5,54000
+Porsche ,Taycan Turbo,260,390,215,AWD,Sedan,4,148301
+Volkswagen ,ID.3 1st,160,340,171,RWD,Hatchback,5,38987
+Tesla ,Model X Performance,250,440,216,AWD,SUV,7,102990
+Smart ,EQ fortwo coupe,130,100,167,RWD,Hatchback,2,21387
+Ford ,Mustang Mach-E SR RWD,180,360,194,RWD,SUV,5,46900
+Mercedes ,EQV 300 Long,140,330,273,FWD,SPV,7,70631
+Fiat ,500e Hatchback,150,250,168,FWD,Hatchback,4,34900
+Tesla ,Cybertruck Single Motor,180,390,256,RWD,Pickup,6,45000
+Audi ,e-tron Sportback 50 quattro,190,295,219,AWD,SUV,5,69551
+Skoda ,Enyaq iV vRS,180,400,193,AWD,SUV,5,47500
+Skoda ,Enyaq iV 60,160,320,181,RWD,SUV,5,37500
+Audi ,e-tron S 55 quattro,210,320,270,AWD,SUV,5,93800
+Smart ,EQ fortwo cabrio,130,95,176,RWD,Cabrio,2,24565
+Nissan ,Ariya e-4ORCE 87kWh,200,420,207,AWD,Hatchback,5,57500
+Fiat ,500e Convertible,150,250,168,FWD,Cabrio,4,37900
+Volkswagen ,ID.3 Pro Performance,160,340,171,RWD,Hatchback,5,35575
+Kia ,e-Soul 39 kWh,157,230,170,FWD,SUV,5,33133
+Byton ,M-Byte 72 kWh 2WD,190,325,222,RWD,SUV,5,53500
+Nissan ,Ariya 63kWh,160,330,191,FWD,Hatchback,5,45000
+Audi ,e-tron S Sportback 55 quattro,210,335,258,AWD,SUV,5,96050
+Nissan ,Ariya e-4ORCE 63kWh,200,325,194,AWD,Hatchback,5,50000
+Nissan ,Ariya e-4ORCE 87kWh Performance,200,375,232,AWD,Hatchback,5,65000
+Byton ,M-Byte 95 kWh 2WD,190,400,238,AWD,SUV,5,62000
