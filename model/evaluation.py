@@ -51,9 +51,9 @@ class RMSE(Evaluation):
     """
     def calculate_score(self, y_true: np.ndarray, y_pred: np.ndarray):
         try:
-            logging.info("Entered the calculate_score method of the RMSE class")
-            rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-            logging.info("The root mean squared error value is: " + str(rmse))
+            logging.info("Calculating RMSE")
+            rmse = mean_squared_error(y_true, y_pred, squared=False)
+            logging.info(f"RMSE:{rmse}")
             return rmse
         except Exception as e:
             logging.error(

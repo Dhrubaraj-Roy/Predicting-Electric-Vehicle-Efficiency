@@ -3,7 +3,7 @@ import numpy as np
 # Read the CSV file
 data = pd.read_csv('/home/dhruba/gigs_project/project_a/Predicting-Electric-Vehicle-Efficiency/data/Cheapestelectriccars-EVDatabase 2023.csv')
 
-data.drop(['Name', 'Subtitle', 'Drive'], axis=1, inplace=True)
+data.drop(['Name', 'Subtitle', 'Drive', 'NumberofSeats'], axis=1, inplace=True)
 
 # Clean the 'PriceinGermany' and 'PriceinUK' columns by removing '€' and '£' signs
 data['PriceinGermany'] = data['PriceinGermany'].str.replace('[€,]', '', regex=True).astype(float)
@@ -28,6 +28,14 @@ data['TopSpeed'] = data['TopSpeed'].str.replace(' km/h', '').astype(float)
 
 # Fill N/A values with the mean of each column
 data.fillna(data.mean(), inplace=True)
+data = data.select_dtypes(include=[np.number])
 
 # Print the cleaned DataFrame
 print(data)
+
+# Get the data types of all variables
+
+data = data.astype(float)
+data_types = data.dtypes
+# Print the variable types
+print(data_types)

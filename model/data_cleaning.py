@@ -67,7 +67,7 @@ class DataPreProcessStrategy(DataStrategy):
             # print("Cleaned Data:")
             # print(data.head())
             
-            data.drop(['Name', 'Subtitle', 'Drive'], axis=1, inplace=True)
+            data.drop(['Name', 'Subtitle', 'Drive',  'NumberofSeats'], axis=1, inplace=True)
 
             # Clean the 'PriceinGermany' and 'PriceinUK' columns by removing '€' and '£' signs
             data['PriceinGermany'] = data['PriceinGermany'].str.replace('[€,]', '', regex=True).astype(float)
