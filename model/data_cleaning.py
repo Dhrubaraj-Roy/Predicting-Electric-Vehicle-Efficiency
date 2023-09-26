@@ -14,59 +14,6 @@ class DataStrategy(ABC):
 class DataPreProcessStrategy(DataStrategy):
     def handle_data(self, data: pd.DataFrame) -> Union[pd.DataFrame, pd.Series]:
         try:
-
-            # # Display the first few rows of the DataFrame to understand its structure
-            # #data.drop(['Subtitle', 'Name'], axis=1, inplace=True)
-            
-            # print("Column Names:")
-            # print(data.columns)
-            # # Drop the 'Subtitle' and 'Name' columns
-            # data.drop(['Subtitle', 'Name'], axis=1,  inplace=True)
-            # print("DataFrame Shape After Drop:", data.shape)
-        
-            # data.replace('N/A', None, inplace=True)
-
-            # # Extract battery capacity from 'Subtitle' column
-            # #data['BatteryCapacity'] = data['Subtitle'].str.extract(r'([\d.]+) kWh')
-
-            # # Handle non-numeric values in 'Efficiency' column
-            # data['Efficiency_WhKm'] = data['Efficiency'].str.extract(r'(\d+) Wh/km').astype(int)
-            # data['FastChargeSpeed_kmph'] = data['FastChargeSpeed'].str.extract(r'(\d+) km/h').fillna(0).astype(int)
-
-
-
-
-            # # Convert data types
-            # #data['BatteryCapacity'] = data['BatteryCapacity'].astype(float)
-
-            # # Handle missing values
-            # columns_to_clean = ['PriceinUK', 'FastChargeSpeed']
-            # for column in columns_to_clean:
-            #     data[column] = data[column].replace('-', pd.NA)
-            #     data[column] = pd.to_numeric(data[column], errors='coerce')
-            #     median = data[column].median()
-            #     data[column].fillna(median, inplace=True)
-
-            # # Handle missing values in 'PriceinUK'
-            # data['PriceinUK'].replace('N/A', pd.NA, inplace=True)
-            # data['PriceinUK'] = data['PriceinUK'].astype(float)
-
-            # # Handle currency columns
-            # data['PriceinGermany'] = data['PriceinGermany'].str.replace('€', '').str.replace(',', '').astype(float)
-
-            # # Check for any remaining missing values in the DataFrame
-            # missing_values = data.isnull().sum()
-            # print("Missing Values:")
-            # print(missing_values)
-
-            # # Save the cleaned DataFrame to a new CSV file
-            # data.to_csv('cleaned_data4.csv', index=False)
-            # data = data.select_dtypes(include=[np.number])
-
-            # # Display the first few rows of the cleaned data
-            # print("Cleaned Data:")
-            # print(data.head())
-            
             data.drop(['Name', 'Subtitle', 'Drive',  'NumberofSeats'], axis=1, inplace=True)
 
             # Clean the 'PriceinGermany' and 'PriceinUK' columns by removing '€' and '£' signs

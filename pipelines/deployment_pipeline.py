@@ -42,17 +42,7 @@ def deployment_trigger(accuracy: float, config: DeploymentTriggerConfig) -> bool
     else:
         raise RuntimeError(f"Model accuracy ({accuracy}) is below the minimum threshold ({config.min_accuracy}). Model will not be deployed.")
 
-# def deployment_trigger(
-#     accuracy: float,
-#     config: DeploymentTriggerConfig,
 
-# ) -> bool:
-#     return accuracy > config.min_accuracy
-# class MLFlowDeploymentLoaderStepParameters(BaseParameters):
-#     pipeline_name: str
-#     step_name: str
-#     running: bool = True
-   
 
 @step(enable_cache=False)
 def prediction_service_loader(
@@ -97,18 +87,7 @@ def prediction_service_loader(
             f"running."
         )
     return existing_services[0]
-# @step
-# def predictor(
-#     service: MLFlowDeploymentService,
-#     data: np.ndarray,
-# ) -> Output(predictions=np.ndarray):
-#     """Run a inference request against a prediction service"""
 
-#     service.start(timeout=10)  # should be a NOP if already started
-#     prediction = service.predict(data)
-#     prediction = prediction.argmax(axis=-1)
-
-#     return prediction
 
 @step
 def predictor(
@@ -138,25 +117,6 @@ def predictor(
 
     
 @pipeline(enable_cache=False, settings={"docker": docker_settings})
-# def continuous_deployment_pipeline(
-#     data_path: str,
-#     min_accuracy: float = 0,
-#     workers: int = 1,
-#     timeout: int = DEFAULT_SERVICE_START_STOP_TIMEOUT,
-# ):
-#     # Link all the steps artifacts together
-#     df = ingest_df(data_path=data_path)
-#     X_train, X_test, y_train, y_test = clean_df(df)
-#     model = train_model(X_train, X_test, y_train, y_test)
-#     r2_score, rmse = evaluate_model(model, X_test, y_test)
-#     deployment_decision = deployment_trigger(r2_score)
-#     mlflow_model_deployer_step(
-#         model=model,
-#         deploy_decision=deployment_decision,
-#         min_accuracy=min_accuracy,
-#         workers=workers,
-#         timeout=timeout, 
-#     )
 def continuous_deployment_pipeline(
     data_path: str,
     min_accuracy: float = 0,
